@@ -23,7 +23,6 @@ import { useAuth } from '@/providers/Auth'
 
 export const Navbar = () => {
   const { user, logout } = useAuth()
-  console.log({ user })
   const { toast } = useToast()
   const router = useRouter()
 

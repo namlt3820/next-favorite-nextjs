@@ -1,11 +1,13 @@
 import { Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { headers } from 'next/headers'
+
 import { Navbar } from '@/components/navbar'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { Toaster } from '@/components/ui/toaster'
 import { constructMetadata } from '@/lib/metadata'
 import { Providers } from '@/providers'
+
 import './globals.css'
 
 // import { Arimo, IBM_Plex_Sans, Roboto } from 'next/font/google'
@@ -51,7 +53,7 @@ export default async function RootLayout({
     <html>
       <body className={inter.className}>
         <Providers>
-          <div className="mx-auto flex min-h-[100dvh] max-w-screen-2xl flex-col px-4">
+          <div className="mx-auto flex min-h-[100dvh] container flex-col px-4">
             <Navbar />
             <main className="flex-1">{children}</main>
             <ScrollToTop />
