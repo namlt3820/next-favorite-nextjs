@@ -42,7 +42,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="fixed inset-x-0 top-0 border-b border-gray-200 bg-white shadow-sm">
+    <nav className="fixed inset-x-0 top-0 border-b border-gray-200 bg-white shadow-sm z-10">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="text-xl font-semibold">Next Favorite</div>
         <div>
