@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { VerifyEmailParams, verifyEmail } from '@/api/verifyEmail'
+import { VerifyEmailParams, verifyEmail } from '@/api/auth/verifyEmail'
 import { SectionHeader } from '@/components/section-header'
 import { SectionWrapper } from '@/components/section-wrapper'
 import { Button } from '@/components/ui/button'

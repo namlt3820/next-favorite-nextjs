@@ -1,5 +1,6 @@
 'use client'
 
+import { ResourceContent } from '@/components/resource-content'
 import { ResourceMenu } from '@/components/resource-menu'
 
 export default function Page({
@@ -14,11 +15,7 @@ export default function Page({
 
       {/* Content Column */}
       <div className="flex-1 p-6">
-        <h1 className="text-2xl font-bold mb-4">Title</h1>
-        <p className="text-lg">
-          This is where you can add the description or content related to the
-          selected category or action.
-        </p>
+        <ResourceContent resource={resource} media={media} service={service} />
       </div>
     </div>
   )

@@ -45,89 +45,65 @@ export const ResourceMenu = ({
         <li>
           <div className="w-full text-left px-4 py-2 rounded">Trakt Movies</div>
           <ul className="ml-6 mt-2 space-y-1">
-            {user ? (
-              <>
-                <li>
-                  <Button
-                    href="/trakt/movie/favorite"
-                    title="Favorite"
-                    selected={
-                      getResourcePath(resource, media, service) ===
-                      '/trakt/movie/favorite'
-                    }
-                  ></Button>
-                </li>
-                <li>
-                  <Button
-                    href="/trakt/movie/ignore"
-                    selected={
-                      getResourcePath(resource, media, service) ===
-                      '/trakt/movie/ignore'
-                    }
-                    title="Ignore"
-                  ></Button>
-                </li>
-              </>
-            ) : null}
             <li>
               <Button
-                href="/trakt/movie/trending"
+                href="/trakt/movies/trending"
                 selected={
                   getResourcePath(resource, media, service) ===
-                  '/trakt/movie/trending'
+                  '/trakt/movies/trending'
                 }
                 title="Trending"
               ></Button>
             </li>
             <li>
               <Button
-                href="/trakt/movie/search"
+                href="/trakt/movies/search"
                 selected={
                   getResourcePath(resource, media, service) ===
-                  '/trakt/movie/search'
+                  '/trakt/movies/search'
                 }
                 title="Search"
               ></Button>
             </li>
             <li>
               <Button
-                href="/trakt/movie/recommend"
+                href="/trakt/movies/recommend"
                 selected={
                   getResourcePath(resource, media, service) ===
-                  '/trakt/movie/recommend'
+                  '/trakt/movies/recommend'
                 }
                 title="Recommend"
               ></Button>
             </li>
-          </ul>
-        </li>
-        <li>
-          <div className="w-full text-left px-4 py-2 rounded">Trakt Shows</div>
-          <ul className="ml-6 mt-2 space-y-1">
             {user ? (
               <>
                 <li>
                   <Button
-                    href="/trakt/shows/favorite"
+                    href="/trakt/movies/favorite"
+                    title="Favorite"
                     selected={
                       getResourcePath(resource, media, service) ===
-                      '/trakt/shows/favorite'
+                      '/trakt/movies/favorite'
                     }
-                    title="Favorite"
                   ></Button>
                 </li>
                 <li>
                   <Button
-                    href="/trakt/shows/ignore"
+                    href="/trakt/movies/ignore"
                     selected={
                       getResourcePath(resource, media, service) ===
-                      '/trakt/shows/ignore'
+                      '/trakt/movies/ignore'
                     }
                     title="Ignore"
                   ></Button>
                 </li>
               </>
             ) : null}
+          </ul>
+        </li>
+        <li>
+          <div className="w-full text-left px-4 py-2 rounded">Trakt Shows</div>
+          <ul className="ml-6 mt-2 space-y-1">
             <li>
               <Button
                 href="/trakt/shows/trending"
@@ -158,35 +134,35 @@ export const ResourceMenu = ({
                 title="Recommend"
               ></Button>
             </li>
-          </ul>
-        </li>
-        <li>
-          <div className="w-full text-left px-4 py-2 rounded">Jikan Anime</div>
-          <ul className="ml-6 mt-2 space-y-1">
             {user ? (
               <>
                 <li>
                   <Button
-                    href="/jikan/anime/favorite"
+                    href="/trakt/shows/favorite"
                     selected={
                       getResourcePath(resource, media, service) ===
-                      '/jikan/anime/favorite'
+                      '/trakt/shows/favorite'
                     }
                     title="Favorite"
                   ></Button>
                 </li>
                 <li>
                   <Button
-                    href="/jikan/anime/ignore"
+                    href="/trakt/shows/ignore"
                     selected={
                       getResourcePath(resource, media, service) ===
-                      '/jikan/anime/ignore'
+                      '/trakt/shows/ignore'
                     }
                     title="Ignore"
                   ></Button>
                 </li>
               </>
             ) : null}
+          </ul>
+        </li>
+        <li>
+          <div className="w-full text-left px-4 py-2 rounded">Jikan Anime</div>
+          <ul className="ml-6 mt-2 space-y-1">
             <li>
               <Button
                 href="/jikan/anime/trending"
@@ -217,6 +193,30 @@ export const ResourceMenu = ({
                 title="Recommend"
               ></Button>
             </li>
+            {user ? (
+              <>
+                <li>
+                  <Button
+                    href="/jikan/anime/favorite"
+                    selected={
+                      getResourcePath(resource, media, service) ===
+                      '/jikan/anime/favorite'
+                    }
+                    title="Favorite"
+                  ></Button>
+                </li>
+                <li>
+                  <Button
+                    href="/jikan/anime/ignore"
+                    selected={
+                      getResourcePath(resource, media, service) ===
+                      '/jikan/anime/ignore'
+                    }
+                    title="Ignore"
+                  ></Button>
+                </li>
+              </>
+            ) : null}
           </ul>
         </li>
       </ul>

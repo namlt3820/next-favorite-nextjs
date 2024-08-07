@@ -8,8 +8,8 @@ import React, {
   useState,
 } from 'react'
 
-import { getUser } from '@/api/getUser'
-import { login as LoginApi, LoginParams } from '@/api/login'
+import { getUser } from '@/api//auth/getUser'
+import { login as LoginApi, LoginParams } from '@/api/auth/login'
 import { User } from '@/types/User'
 
 type AuthContext = {

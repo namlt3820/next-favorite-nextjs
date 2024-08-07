@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { CreateUserParams, createUser } from '@/api/createUser'
+import { CreateUserParams, createUser } from '@/api/auth/createUser'
 import { SectionHeader } from '@/components/section-header'
 import { SectionWrapper } from '@/components/section-wrapper'
 import { Button } from '@/components/ui/button'

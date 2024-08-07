@@ -49,37 +49,13 @@ export const Navbar = () => {
           <ul className="flex space-x-4">
             <li>
               <Link
-                href="/home"
+                href="/"
                 className="hover:text-gray-600 text-sm font-medium"
               >
                 Home
               </Link>
             </li>
-            <li>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <span className="hover:text-gray-600 text-sm font-medium cursor-pointer">
-                    Sign Up
-                  </span>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem className="cursor-pointer">
-                      <Link href={'/account/create'} className="flex">
-                        <UserPlus className="mr-2 h-4 w-4" />
-                        <span>Sign Up</span>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      <Link href={'/account/verify'} className="flex">
-                        <ShieldCheck className="mr-2 h-4 w-4" />
-                        <span>Confirmation Code</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </li>
+
             {user ? (
               <li>
                 <span
@@ -90,18 +66,45 @@ export const Navbar = () => {
                 </span>
               </li>
             ) : (
-              <li>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <span className="hover:text-gray-600 text-sm font-medium cursor-pointer">
-                      Login
-                    </span>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-96">
-                    <LoginForm />
-                  </PopoverContent>
-                </Popover>
-              </li>
+              <>
+                <li>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <span className="hover:text-gray-600 text-sm font-medium cursor-pointer">
+                        Sign Up
+                      </span>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem className="cursor-pointer">
+                          <Link href={'/account/create'} className="flex">
+                            <UserPlus className="mr-2 h-4 w-4" />
+                            <span>Sign Up</span>
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="cursor-pointer">
+                          <Link href={'/account/verify'} className="flex">
+                            <ShieldCheck className="mr-2 h-4 w-4" />
+                            <span>Confirmation Code</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </li>
+                <li>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <span className="hover:text-gray-600 text-sm font-medium cursor-pointer">
+                        Login
+                      </span>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-96">
+                      <LoginForm />
+                    </PopoverContent>
+                  </Popover>
+                </li>
+              </>
             )}
           </ul>
         </div>
