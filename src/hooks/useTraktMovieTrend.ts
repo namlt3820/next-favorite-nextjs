@@ -16,6 +16,8 @@ export const useTraktMovieTrend = () => {
   >({
     queryKey: ['trakt-movie-trend', params],
     queryFn: () => getTraktTrendingMovies(params),
+    retry: false,
+    staleTime: 1000 * 60 * 60,
   })
 
   return {

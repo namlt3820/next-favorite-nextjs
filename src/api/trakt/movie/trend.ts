@@ -30,7 +30,6 @@ export const getTraktTrendingMovies = async ({
     )
 
     if (res.ok) {
-      console.log(res)
       return {
         docs: await res.json(),
         page: Number(res.headers.get('X-Pagination-Page')),

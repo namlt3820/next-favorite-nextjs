@@ -11,9 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { ITraktMovie } from '@/types/TraktMovie'
 
 export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
+  const { addToFavorite } = useRecommendSources()
+
   const {
     movie: {
       title,
@@ -34,7 +37,8 @@ export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
     <Card className="w-[500px] flex flex-col">
       <CardHeader>
         <CardTitle className="text-center">
-          {title} {year ? `(${year})` : ''} {certification ? certification : ''}
+          {title} {year ? `(${year})` : ''}{' '}
+          {certification ? `(${certification})` : ''}
         </CardTitle>
         <CardDescription className="text-center">{tagline}</CardDescription>
       </CardHeader>
@@ -70,7 +74,16 @@ export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
       </CardContent>
       <CardFooter className="flex justify-between mt-auto">
         <Button variant={'outline'}>Add to Ignore</Button>
-        <Button>Add to Favorite</Button>
+        <Button
+          onClick={() =>
+            addToFavorite({
+              keywords: ['trakt', 'movie'],
+              itemId: trakt.toString(),
+            })
+          }
+        >
+          Add to Favorite
+        </Button>
       </CardFooter>
     </Card>
   )
