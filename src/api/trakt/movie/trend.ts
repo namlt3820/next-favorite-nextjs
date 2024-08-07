@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-import { Pagination } from '@/types/Pagination'
+import { IPagination } from '@/types/Pagination'
 import { ITraktMovie } from '@/types/TraktMovie'
 
 export const getTraktTrendingMovies = async ({
@@ -9,7 +9,7 @@ export const getTraktTrendingMovies = async ({
 }: {
   page?: number
   limit?: number
-}): Promise<Pagination<ITraktMovie>> => {
+}): Promise<IPagination<ITraktMovie>> => {
   const stringifiedQuery = qs.stringify(
     {
       page,
@@ -30,12 +30,13 @@ export const getTraktTrendingMovies = async ({
     )
 
     if (res.ok) {
+      console.log(res)
       return {
         docs: await res.json(),
-        page: Number(res.headers.get('x-pagination-page')),
-        pageCount: Number(res.headers.get('x-pagination-page-count')),
-        limit: Number(res.headers.get('x-pagination-limit')),
-        itemCount: Number(res.headers.get('x-pagination-item-count')),
+        page: Number(res.headers.get('X-Pagination-Page')),
+        pageCount: Number(res.headers.get('X-Pagination-Page-Count')),
+        limit: Number(res.headers.get('X-Pagination-Limit')),
+        itemCount: Number(res.headers.get('X-Pagination-Item-Count')),
       }
     }
 

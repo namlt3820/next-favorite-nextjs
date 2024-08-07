@@ -27,11 +27,14 @@ export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
       trailer,
     },
   } = movie
+
+  if (trakt === 0) return null
+
   return (
-    <Card className="w-[500px]">
+    <Card className="w-[500px] flex flex-col">
       <CardHeader>
         <CardTitle className="text-center">
-          {title} ({year}) ({certification})
+          {title} {year ? `(${year})` : ''} {certification ? certification : ''}
         </CardTitle>
         <CardDescription className="text-center">{tagline}</CardDescription>
       </CardHeader>
@@ -65,7 +68,7 @@ export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex justify-between mt-auto">
         <Button variant={'outline'}>Add to Ignore</Button>
         <Button>Add to Favorite</Button>
       </CardFooter>

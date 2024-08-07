@@ -1,7 +1,7 @@
 import { capitalize } from 'lodash'
 
 import { TraktMovieSearch } from '@/app/[resource]/[media]/[service]/trakt/movie/trakt-movie-search'
-import { TraktMovieTrend } from '@/app/[resource]/[media]/[service]/trakt/movie/trakt-movie-trend'
+import { TraktMovieTrend } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend'
 
 export const ResourceContent = ({
   resource,
@@ -12,6 +12,7 @@ export const ResourceContent = ({
   media?: string
   service?: string
 }) => {
+  console.log({ resource, media, service })
   return (
     <>
       <h1 className="text-2xl font-bold mb-4">

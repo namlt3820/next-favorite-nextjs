@@ -1,8 +1,10 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { scrollToTop } from '@/lib/scrollToTop'
 
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -21,14 +23,6 @@ export const ScrollToTop = () => {
 
     return () => window.removeEventListener('scroll', toggleVisibility)
   }, [])
-
-  // Scroll to top on button click
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
 
   return (
     <div
