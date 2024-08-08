@@ -9,7 +9,7 @@ import { IRecommendSource } from '@/types/RecommendSource'
 
 export const useRecommendSources = () => {
   const { toast } = useToast()
-  const { data, isLoading, isError, refetch } = useQuery<IRecommendSource[]>({
+  const { data } = useQuery<IRecommendSource[]>({
     queryKey: ['recommend-sources'],
     queryFn: () => getRecommendSources(),
     staleTime: 1000 * 60 * 60,
@@ -53,5 +53,6 @@ export const useRecommendSources = () => {
   return {
     addToFavorite,
     getRecommendSourceId,
+    createFavoriteMutation,
   }
 }

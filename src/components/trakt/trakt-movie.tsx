@@ -43,13 +43,18 @@ export const TraktMovie = ({
         </CardTitle>
         <CardDescription className="text-center">{tagline}</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4 items-center">
+      <CardContent className="flex flex-col gap-4">
         <div className="flex gap-4 items-start">
           <div className="relative w-[150px] shrink-0">
-            <Image alt="Message Image" src={poster} width={150} height={500} />
+            <Image
+              alt="Message Image"
+              src={poster ? poster : '/poster-not-found.png'}
+              width={150}
+              height={500}
+            />
           </div>
           <div className="text-sm flex flex-col gap-4">
-            {overview}
+            {overview ? overview : '<No overview>'}
 
             <div className="flex flex-wrap gap-2">
               {genres.map((genre) => (

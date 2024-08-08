@@ -6,12 +6,11 @@ import {
   GetTraktMovieDetailResponse,
   getTraktMovieDetail,
 } from '@/api/trakt/movie/detail'
+import { TraktMovieFavoriteAction } from '@/app/[resource]/[media]/[service]/trakt/movie/favorite/trakt-movie-favorite-action'
 import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { ILastEvaluatedKey } from '@/types/LastEvaluatedKey'
-
-import { TraktMovieFavoriteAction } from './trakt-movie-favorite-action'
 
 export const TraktMovieFavorite = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -101,18 +100,20 @@ export const TraktMovieFavorite = () => {
   }
 
   return (
-    <div>
-      {movies.map((movie) => (
-        <TraktMovie
-          key={movie.itemId}
-          movie={{ movie: movie.data }}
-          actionComponent={
-            <TraktMovieFavoriteAction movie={{ movie: movie.data }} />
-          }
-        ></TraktMovie>
-      ))}
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap gap-4">
+        {movies.map((movie) => (
+          <TraktMovie
+            key={movie.itemId}
+            movie={{ movie: movie.data }}
+            actionComponent={
+              <TraktMovieFavoriteAction movie={{ movie: movie.data }} />
+            }
+          ></TraktMovie>
+        ))}
+      </div>
       {lastKey ? (
-        <div className="mx-auto w-full p-6 flex justify-center">
+        <div className="mx-auto w-full flex justify-center">
           <Button variant={'outline'} onClick={handleClickNext}>
             Next <ChevronRight className="w-5 h-5" />
           </Button>
