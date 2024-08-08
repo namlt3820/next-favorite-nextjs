@@ -2,21 +2,22 @@ import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { ITraktMovie } from '@/types/TraktMovie'
 
-export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
-  const { addToFavorite } = useRecommendSources()
-
+export const TraktMovie = ({
+  movie,
+  actionComponent,
+}: {
+  movie: ITraktMovie
+  actionComponent: JSX.Element | null
+}) => {
   const {
     movie: {
       title,
@@ -72,19 +73,7 @@ export const TraktMovie = ({ movie }: { movie: ITraktMovie }) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between mt-auto">
-        <Button variant={'outline'}>Add to Ignore</Button>
-        <Button
-          onClick={() =>
-            addToFavorite({
-              keywords: ['trakt', 'movie'],
-              itemId: trakt.toString(),
-            })
-          }
-        >
-          Add to Favorite
-        </Button>
-      </CardFooter>
+      {actionComponent}
     </Card>
   )
 }

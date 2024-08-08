@@ -1,9 +1,9 @@
 import { Loader2 } from 'lucide-react'
 
+import { TraktMovieTrendAction } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend-action'
+import { TraktMovieTrendPagination } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend-pagination'
 import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { useTraktMovieTrend } from '@/hooks/useTraktMovieTrend'
-
-import { TraktMovieTrendPagination } from './trakt-movie-trend-pagination'
 
 export const TraktMovieTrend = () => {
   const { data, isLoading, isError } = useTraktMovieTrend()
@@ -28,7 +28,11 @@ export const TraktMovieTrend = () => {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap gap-4">
         {data?.docs.map((movie) => (
-          <TraktMovie key={movie.movie.ids.trakt} movie={movie} />
+          <TraktMovie
+            key={movie.movie.ids.trakt}
+            movie={movie}
+            actionComponent={<TraktMovieTrendAction movie={movie} />}
+          />
         ))}
       </div>
       <TraktMovieTrendPagination data={data} />
