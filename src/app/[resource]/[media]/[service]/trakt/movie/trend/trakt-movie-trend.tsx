@@ -6,7 +6,7 @@ import { useTraktMovieTrend } from '@/hooks/useTraktMovieTrend'
 import { TraktMovieTrendPagination } from './trakt-movie-trend-pagination'
 
 export const TraktMovieTrend = () => {
-  const { data, isLoading, isError, refetch } = useTraktMovieTrend()
+  const { data, isLoading, isError } = useTraktMovieTrend()
 
   if (isLoading)
     return (

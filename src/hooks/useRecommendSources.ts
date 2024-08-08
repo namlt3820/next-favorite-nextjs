@@ -37,16 +37,21 @@ export const useRecommendSources = () => {
     keywords: string[]
     itemId: string
   }) => {
-    const recommendSourceId = data?.find((source) =>
-      keywords.every((item) => source.name.toLowerCase().includes(item))
-    )?.recommendSourceId
+    const recommendSourceId = getRecommendSourceId(keywords)
 
     if (itemId && recommendSourceId) {
       await createFavoriteMutation.mutate({ recommendSourceId, itemId })
     }
   }
 
+  const getRecommendSourceId = (keywords: string[]) => {
+    return data?.find((source) =>
+      keywords.every((item) => source.name.toLowerCase().includes(item))
+    )?.recommendSourceId
+  }
+
   return {
     addToFavorite,
+    getRecommendSourceId,
   }
 }
