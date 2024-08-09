@@ -3,11 +3,7 @@ import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'
 import { ITraktMovie } from '@/types/TraktMovie'
 
-export const TraktMovieRecommendAction = ({
-  movie,
-}: {
-  movie: ITraktMovie
-}) => {
+export const TraktMovieSearchAction = ({ movie }: { movie: ITraktMovie }) => {
   const {
     movie: {
       ids: { trakt },
