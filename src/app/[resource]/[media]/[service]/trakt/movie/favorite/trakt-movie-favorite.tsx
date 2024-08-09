@@ -10,7 +10,24 @@ import { TraktMovieFavoriteAction } from '@/app/[resource]/[media]/[service]/tra
 import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
+import { scrollToTop } from '@/lib/scrollToTop'
 import { ILastEvaluatedKey } from '@/types/LastEvaluatedKey'
+
+const sortMoviesResponse = ({
+  itemIds,
+  movies,
+}: {
+  itemIds: number[]
+  movies: GetTraktMovieDetailResponse[]
+}) => {
+  const sortedMoviesResponse = []
+  for (const itemId of itemIds) {
+    const movie = movies.find((movie) => movie.itemId === itemId)
+    sortedMoviesResponse.push(movie!)
+  }
+
+  return sortedMoviesResponse
+}
 
 export const TraktMovieFavorite = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -37,7 +54,11 @@ export const TraktMovieFavorite = () => {
         if (items.length) {
           const itemIds = items.map(({ itemId }) => Number(itemId))
           const moviesResponse = await getTraktMovieDetail({ itemIds })
-          setMovies(moviesResponse)
+          const sortedMoviesResponse = sortMoviesResponse({
+            itemIds,
+            movies: moviesResponse,
+          })
+          setMovies(sortedMoviesResponse)
         }
 
         if (lastEvaluatedKey) {
@@ -59,6 +80,7 @@ export const TraktMovieFavorite = () => {
       return
     }
 
+    scrollToTop()
     try {
       setIsLoading(true)
       const { items, lastEvaluatedKey } = await getFavoritesApi({
@@ -69,7 +91,14 @@ export const TraktMovieFavorite = () => {
       if (items.length) {
         const itemIds = items.map(({ itemId }) => Number(itemId))
         const moviesResponse = await getTraktMovieDetail({ itemIds })
-        setMovies(moviesResponse)
+        const sortedMoviesResponse = []
+        for (const itemId of itemIds) {
+          const movie = moviesResponse.find(
+            (repsonse) => repsonse.itemId === itemId
+          )
+          sortedMoviesResponse.push(movie!)
+        }
+        setMovies(sortedMoviesResponse)
       }
 
       setLastKey(lastEvaluatedKey)

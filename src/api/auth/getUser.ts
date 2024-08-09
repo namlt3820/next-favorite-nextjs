@@ -26,8 +26,10 @@ export const getUser = async (): Promise<User | null> => {
       return data
     }
 
+    localStorage.removeItem('accessToken')
     throw new Error('An error occurred while getting user data.')
   } catch (e) {
+    localStorage.removeItem('accessToken')
     throw new Error('An error occurred while getting user data.')
   }
 }

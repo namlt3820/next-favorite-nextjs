@@ -105,8 +105,8 @@ export const LoginForm = () => {
         <div className="flex justify-center">
           {pending ? (
             <Button disabled>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Please wait
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             </Button>
           ) : (
             <Button type="submit">{'Login'}</Button>

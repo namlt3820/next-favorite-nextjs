@@ -17,10 +17,10 @@ export const useRecommendSources = () => {
 
   const createFavoriteMutation = useMutation({
     mutationFn: (params: CreateFavoriteParams) => createFavorite(params),
-    onError: () => {
+    onError: (error) => {
       toast({
         title: 'Create favorite item failed',
-        description: TRY_AGAIN,
+        description: error.message || TRY_AGAIN,
       })
     },
     onSuccess: () => {

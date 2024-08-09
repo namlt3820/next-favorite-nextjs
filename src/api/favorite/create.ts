@@ -11,7 +11,9 @@ export const createFavorite = async ({
     const accessToken = localStorage.getItem('accessToken')
 
     if (!accessToken) {
-      throw new Error('Missing access token.')
+      throw new Error(
+        'You need to log in or register before adding to your favorites list.'
+      )
     }
 
     const res = await fetch(
@@ -31,7 +33,10 @@ export const createFavorite = async ({
     }
 
     throw new Error('An error occurred while creating creating favorite.')
-  } catch (e) {
+  } catch (e: any) {
+    if (e.message) {
+      throw e
+    }
     throw new Error('An error occurred while creating creating favorite.')
   }
 }
