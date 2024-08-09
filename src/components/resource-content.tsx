@@ -1,6 +1,7 @@
 import { capitalize } from 'lodash'
 
 import { TraktMovieFavorite } from '@/app/[resource]/[media]/[service]/trakt/movie/favorite/trakt-movie-favorite'
+import { TraktMovieIgnore } from '@/app/[resource]/[media]/[service]/trakt/movie/ignore/trakt-movie-ignore'
 import { TraktMovieRecommend } from '@/app/[resource]/[media]/[service]/trakt/movie/recommend/trakt-movie-recommend'
 import { TraktMovieSearch } from '@/app/[resource]/[media]/[service]/trakt/movie/search/trakt-movie-search'
 import { TraktMovieTrend } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend'
@@ -35,6 +36,10 @@ export const ResourceContent = ({
       {resource === 'trakt' &&
         media === 'movies' &&
         service === 'recommend' && <TraktMovieRecommend />}
+
+      {resource === 'trakt' && media === 'movies' && service === 'ignore' && (
+        <TraktMovieIgnore />
+      )}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { AddFavoriteButton } from '@/components/add-favorite'
-import { Button } from '@/components/ui/button'
+import { AddIgnoreButton } from '@/components/add-ignore'
 import { CardFooter } from '@/components/ui/card'
 import { ITraktMovie } from '@/types/TraktMovie'
 
@@ -14,7 +14,7 @@ export const TraktMovieTrendAction = ({ movie }: { movie: ITraktMovie }) => {
 
   return (
     <CardFooter className="flex justify-between mt-auto">
-      <Button variant={'outline'}>Add to Ignore</Button>
+      <AddIgnoreButton keywords={['trakt', 'movie']} itemId={trakt} />
       <AddFavoriteButton keywords={['trakt', 'movie']} itemId={trakt} />
     </CardFooter>
   )
