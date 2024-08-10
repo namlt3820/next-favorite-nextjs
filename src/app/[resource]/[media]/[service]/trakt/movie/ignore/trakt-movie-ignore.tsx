@@ -11,19 +11,25 @@ import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { scrollToTop } from '@/lib/scrollToTop'
+import { IFavorite } from '@/types/Favorite'
 import { ILastEvaluatedKey } from '@/types/LastEvaluatedKey'
 
 const sortMoviesResponse = ({
-  itemIds,
+  items,
   movies,
 }: {
-  itemIds: number[]
+  items: IFavorite[]
   movies: GetTraktMovieDetailResponse[]
 }) => {
   const sortedMoviesResponse = []
-  for (const itemId of itemIds) {
-    const movie = movies.find((movie) => movie.itemId === itemId)
-    sortedMoviesResponse.push(movie!)
+  for (const item of items) {
+    const movie = movies.find((movie) => movie.itemId === Number(item.itemId))
+    if (movie) {
+      sortedMoviesResponse.push({
+        movie,
+        id: item.id,
+      })
+    }
   }
 
   return sortedMoviesResponse
@@ -35,7 +41,9 @@ export const TraktMovieIgnore = () => {
   const [lastKey, setLastKey] = useState<ILastEvaluatedKey | undefined>(
     undefined
   )
-  const [movies, setMovies] = useState<GetTraktMovieDetailResponse[]>([])
+  const [movies, setMovies] = useState<
+    { id: string; movie: GetTraktMovieDetailResponse }[]
+  >([])
   const { getRecommendSourceId } = useRecommendSources()
   const recommendSourceId = getRecommendSourceId(['trakt', 'movie'])
 
@@ -55,7 +63,7 @@ export const TraktMovieIgnore = () => {
           const itemIds = items.map(({ itemId }) => Number(itemId))
           const moviesResponse = await getTraktMovieDetail({ itemIds })
           const sortedMoviesResponse = sortMoviesResponse({
-            itemIds,
+            items,
             movies: moviesResponse,
           })
           setMovies(sortedMoviesResponse)
@@ -91,13 +99,10 @@ export const TraktMovieIgnore = () => {
       if (items.length) {
         const itemIds = items.map(({ itemId }) => Number(itemId))
         const moviesResponse = await getTraktMovieDetail({ itemIds })
-        const sortedMoviesResponse = []
-        for (const itemId of itemIds) {
-          const movie = moviesResponse.find(
-            (repsonse) => repsonse.itemId === itemId
-          )
-          sortedMoviesResponse.push(movie!)
-        }
+        const sortedMoviesResponse = sortMoviesResponse({
+          items,
+          movies: moviesResponse,
+        })
         setMovies(sortedMoviesResponse)
       }
 
@@ -133,10 +138,13 @@ export const TraktMovieIgnore = () => {
       <div className="flex flex-wrap gap-4">
         {movies.map((movie) => (
           <TraktMovie
-            key={movie.itemId}
-            movie={{ movie: movie.data }}
+            key={movie.id}
+            movie={{ movie: movie.movie?.data }}
             actionComponent={
-              <TraktMovieIgnoreAction movie={{ movie: movie.data }} />
+              <TraktMovieIgnoreAction
+                movie={{ movie: movie.movie.data }}
+                id={movie.id}
+              />
             }
           ></TraktMovie>
         ))}

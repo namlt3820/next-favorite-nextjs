@@ -1,11 +1,14 @@
-import { Button } from '@/components/ui/button'
+import { RemoveIgnoreButton } from '@/components/remove-ignore'
 import { CardFooter } from '@/components/ui/card'
-import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { ITraktMovie } from '@/types/TraktMovie'
 
-export const TraktMovieIgnoreAction = ({ movie }: { movie: ITraktMovie }) => {
-  const { addToFavorite } = useRecommendSources()
-
+export const TraktMovieIgnoreAction = ({
+  movie,
+  id,
+}: {
+  movie: ITraktMovie
+  id: string
+}) => {
   const {
     movie: {
       ids: { trakt },
@@ -16,17 +19,7 @@ export const TraktMovieIgnoreAction = ({ movie }: { movie: ITraktMovie }) => {
 
   return (
     <CardFooter className="flex justify-end mt-auto">
-      <Button
-        onClick={() =>
-          //   addToFavorite({
-          //     keywords: ['trakt', 'movie'],
-          //     itemId: trakt.toString(),
-          //   })
-          console.log('ok')
-        }
-      >
-        Remove from Favorite
-      </Button>
+      <RemoveIgnoreButton id={id} />
     </CardFooter>
   )
 }

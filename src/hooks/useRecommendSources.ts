@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { CreateFavoriteParams, createFavorite } from '@/api/favorite/create'
 import { DeleteFavoriteParams, deleteFavorite } from '@/api/favorite/delete'
 import { CreateIgnoreParams, createIgnore } from '@/api/ignore/create'
+import { DeleteIgnoreParams, deleteIgnore } from '@/api/ignore/delete'
 import { getRecommendSources } from '@/api/recommend-source/list'
 import { useToast } from '@/components/ui/use-toast'
 import { TRY_AGAIN } from '@/lib/messages'
@@ -106,6 +107,31 @@ export const useRecommendSources = () => {
     }
   }
 
+  /**
+   * delete ignore
+   */
+  const deleteIgnoreMutation = useMutation({
+    mutationFn: (params: DeleteIgnoreParams) => deleteIgnore(params),
+    onError: (error) => {
+      toast({
+        title: 'Remove ignored item failed',
+        description: error.message || TRY_AGAIN,
+      })
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Remove ignored item successfully',
+      })
+      location.reload()
+    },
+  })
+
+  const removeFromIgnore = async ({ id }: { id: string }) => {
+    if (id) {
+      deleteIgnoreMutation.mutate({ id })
+    }
+  }
+
   const getRecommendSourceId = (keywords: string[]) => {
     return data?.find((source) =>
       keywords.every((item) => source.name.toLowerCase().includes(item))
@@ -120,5 +146,7 @@ export const useRecommendSources = () => {
     createIgnoreMutation,
     removeFromFavorite,
     deleteFavoriteMutation,
+    removeFromIgnore,
+    deleteIgnoreMutation,
   }
 }
