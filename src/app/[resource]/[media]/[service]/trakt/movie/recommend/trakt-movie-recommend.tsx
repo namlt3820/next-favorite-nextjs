@@ -84,6 +84,9 @@ export const TraktMovieRecommend = () => {
           ></TraktMovie>
         ))}
       </div>
+      <Button className="self-start" onClick={handleRefreshButton}>
+        Refresh
+      </Button>
     </div>
   )
 }
