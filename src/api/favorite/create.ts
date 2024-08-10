@@ -12,7 +12,7 @@ export const createFavorite = async ({
 
     if (!accessToken) {
       throw new Error(
-        'You need to log in or register before adding to your favorites list.'
+        'You need to log in or register before adding to your favorite list .'
       )
     }
 
@@ -32,11 +32,11 @@ export const createFavorite = async ({
       return true
     }
 
-    throw new Error('An error occurred while creating creating favorite.')
+    throw new Error('An error occurred while creating favorite.')
   } catch (e: any) {
     if (e.message) {
       throw e
     }
-    throw new Error('An error occurred while creating creating favorite.')
+    throw new Error('An error occurred while creating favorite.')
   }
 }

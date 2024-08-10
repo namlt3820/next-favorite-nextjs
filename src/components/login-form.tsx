@@ -106,7 +106,7 @@ export const LoginForm = () => {
           {pending ? (
             <Button disabled>
               Please wait
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="ml-2 h-4 w-4 animate-spin" />
             </Button>
           ) : (
             <Button type="submit">{'Login'}</Button>

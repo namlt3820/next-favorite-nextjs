@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
 
 import { CreateFavoriteParams, createFavorite } from '@/api/favorite/create'
+import { DeleteFavoriteParams, deleteFavorite } from '@/api/favorite/delete'
 import { CreateIgnoreParams, createIgnore } from '@/api/ignore/create'
 import { getRecommendSources } from '@/api/recommend-source/list'
 import { useToast } from '@/components/ui/use-toast'
@@ -16,6 +17,9 @@ export const useRecommendSources = () => {
     staleTime: 1000 * 60 * 60,
   })
 
+  /**
+   * create favorite
+   */
   const createFavoriteMutation = useMutation({
     mutationFn: (params: CreateFavoriteParams) => createFavorite(params),
     onError: (error) => {
@@ -45,6 +49,9 @@ export const useRecommendSources = () => {
     }
   }
 
+  /**
+   * create ignore
+   */
   const createIgnoreMutation = useMutation({
     mutationFn: (params: CreateIgnoreParams) => createIgnore(params),
     onError: (error) => {
@@ -74,6 +81,31 @@ export const useRecommendSources = () => {
     }
   }
 
+  /**
+   * delete favorite
+   */
+  const deleteFavoriteMutation = useMutation({
+    mutationFn: (params: DeleteFavoriteParams) => deleteFavorite(params),
+    onError: (error) => {
+      toast({
+        title: 'Remove favorite item failed',
+        description: error.message || TRY_AGAIN,
+      })
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Remove favorite item successfully',
+      })
+      location.reload()
+    },
+  })
+
+  const removeFromFavorite = async ({ id }: { id: string }) => {
+    if (id) {
+      deleteFavoriteMutation.mutate({ id })
+    }
+  }
+
   const getRecommendSourceId = (keywords: string[]) => {
     return data?.find((source) =>
       keywords.every((item) => source.name.toLowerCase().includes(item))
@@ -86,5 +118,7 @@ export const useRecommendSources = () => {
     createFavoriteMutation,
     addToIgnore,
     createIgnoreMutation,
+    removeFromFavorite,
+    deleteFavoriteMutation,
   }
 }

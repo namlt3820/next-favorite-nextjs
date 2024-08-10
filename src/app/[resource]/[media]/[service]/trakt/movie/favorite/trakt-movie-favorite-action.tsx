@@ -1,11 +1,14 @@
-import { Button } from '@/components/ui/button'
+import { RemoveFavoriteButton } from '@/components/remove-favorite'
 import { CardFooter } from '@/components/ui/card'
-import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { ITraktMovie } from '@/types/TraktMovie'
 
-export const TraktMovieFavoriteAction = ({ movie }: { movie: ITraktMovie }) => {
-  const { addToFavorite } = useRecommendSources()
-
+export const TraktMovieFavoriteAction = ({
+  movie,
+  id,
+}: {
+  movie: ITraktMovie
+  id: string
+}) => {
   const {
     movie: {
       ids: { trakt },
@@ -16,17 +19,7 @@ export const TraktMovieFavoriteAction = ({ movie }: { movie: ITraktMovie }) => {
 
   return (
     <CardFooter className="flex justify-end mt-auto">
-      <Button
-        onClick={() =>
-          //   addToFavorite({
-          //     keywords: ['trakt', 'movie'],
-          //     itemId: trakt.toString(),
-          //   })
-          console.log('ok')
-        }
-      >
-        Remove from Favorite
-      </Button>
+      <RemoveFavoriteButton id={id} />
     </CardFooter>
   )
 }
