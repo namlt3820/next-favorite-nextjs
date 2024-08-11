@@ -1,34 +1,34 @@
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
-import { getTraktMovieRecommend as getTraktMovieRecommendApi } from '@/api/trakt/movie/recommend'
-import { TraktMovieRecommendAction } from '@/app/[resource]/[media]/[service]/trakt/movie/recommend/trakt-movie-recommend-action'
-import { TraktMovie } from '@/components/trakt/trakt-movie'
+import { getTraktShowRecommend as getTraktShowRecommendApi } from '@/api/trakt/show/recommend'
+import { TraktShowRecommendAction } from '@/app/[resource]/[media]/[service]/trakt/show/recommend/trakt-show-recommend-action'
+import { TraktShow } from '@/components/trakt/trakt-show'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { scrollToTop } from '@/lib/scrollToTop'
-import { Movie } from '@/types/TraktMovie'
+import { Show } from '@/types/TraktShow'
 
-export const TraktMovieRecommend = () => {
+export const TraktShowRecommend = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
-  const [movies, setMovies] = useState<Movie[]>([])
+  const [shows, setShows] = useState<Show[]>([])
   const { getRecommendSourceId } = useRecommendSources()
-  const recommendSourceId = getRecommendSourceId(['trakt', 'movie'])
+  const recommendSourceId = getRecommendSourceId(['trakt', 'show'])
 
-  const getTraktMovieRecommend = useCallback(async () => {
+  const getTraktShowRecommend = useCallback(async () => {
     try {
       if (!recommendSourceId) {
         return
       }
       setIsLoading(true)
 
-      const movies = await getTraktMovieRecommendApi({
+      const shows = await getTraktShowRecommendApi({
         recommendSourceId,
       })
 
-      if (movies.length) {
-        setMovies(movies)
+      if (shows.length) {
+        setShows(shows)
       }
 
       setIsLoading(false)
@@ -40,18 +40,18 @@ export const TraktMovieRecommend = () => {
   }, [recommendSourceId])
 
   useEffect(() => {
-    getTraktMovieRecommend()
-  }, [getTraktMovieRecommend])
+    getTraktShowRecommend()
+  }, [getTraktShowRecommend])
 
   const handleRefreshButton = () => {
-    getTraktMovieRecommend()
+    getTraktShowRecommend()
     scrollToTop()
   }
 
   if (isLoading) {
     return (
       <div className="flex items-center gap-3">
-        Loading your recommended movies from the Trakt API. Please wait.{' '}
+        Loading your recommended shows from the Trakt API. Please wait.{' '}
         <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     )
@@ -60,7 +60,7 @@ export const TraktMovieRecommend = () => {
   if (isError) {
     return (
       <div>
-        An error occurred while loading your recommended movies from the Trakt
+        An error occurred while loading your recommended shows from the Trakt
         API. Please try again later or provide feedback.
       </div>
     )
@@ -69,22 +69,22 @@ export const TraktMovieRecommend = () => {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        To see different recommended movies, please add some movies to your
+        To see different recommended shows, please add some shows to your
         favorites first, or click the refresh button below.
       </div>
       <Button className="self-start" onClick={handleRefreshButton}>
         Refresh
       </Button>
       <div className="flex flex-wrap gap-4">
-        {movies.map((movie) => (
-          <TraktMovie
-            key={movie.ids.trakt}
-            movie={{ movie }}
-            actionComponent={<TraktMovieRecommendAction movie={{ movie }} />}
-          ></TraktMovie>
+        {shows.map((show) => (
+          <TraktShow
+            key={show.ids.trakt}
+            show={{ show }}
+            actionComponent={<TraktShowRecommendAction show={{ show }} />}
+          ></TraktShow>
         ))}
       </div>
-      {movies.length ? (
+      {shows.length ? (
         <Button className="self-start" onClick={handleRefreshButton}>
           Refresh
         </Button>

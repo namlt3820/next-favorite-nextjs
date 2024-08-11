@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { TraktMovieSearchAction } from '@/app/[resource]/[media]/[service]/trakt/movie/search/trakt-movie-search-action'
-import { TraktMovieSearchPagination } from '@/app/[resource]/[media]/[service]/trakt/movie/search/trakt-movie-search-pagination'
-import { TraktMovie } from '@/components/trakt/trakt-movie'
+import { TraktShowSearchAction } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search-action'
+import { TraktShowSearchPagination } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search-pagination'
+import { TraktShow } from '@/components/trakt/trakt-show'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -19,14 +19,14 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useSearchTraktMovie } from '@/hooks/useSearchTraktMovie'
+import { useSearchTraktShow } from '@/hooks/useSearchTraktShow'
 
 const formSchema = z.object({
   query: z.string().max(500),
 })
 
-export const TraktMovieSearch = () => {
-  const { data, isError, isLoading } = useSearchTraktMovie()
+export const TraktShowSearch = () => {
+  const { data, isError, isLoading } = useSearchTraktShow()
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,7 +38,7 @@ export const TraktMovieSearch = () => {
 
   const onSubmit = async () => {
     router.push(
-      `/trakt/movies/search?query=${encodeURIComponent(form.getValues().query)}`
+      `/trakt/shows/search?query=${encodeURIComponent(form.getValues().query)}`
     )
   }
 
@@ -101,15 +101,15 @@ export const TraktMovieSearch = () => {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-4">
-          {data?.docs.map((movie) => (
-            <TraktMovie
-              key={movie.movie.ids.trakt}
-              movie={movie}
-              actionComponent={<TraktMovieSearchAction movie={movie} />}
+          {data?.docs.map((show) => (
+            <TraktShow
+              key={show.show.ids.trakt}
+              show={show}
+              actionComponent={<TraktShowSearchAction show={show} />}
             />
           ))}
         </div>
-        <TraktMovieSearchPagination data={data} />
+        <TraktShowSearchPagination data={data} />
       </div>
     </div>
   )

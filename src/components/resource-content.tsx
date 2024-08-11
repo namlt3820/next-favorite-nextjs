@@ -5,6 +5,11 @@ import { TraktMovieIgnore } from '@/app/[resource]/[media]/[service]/trakt/movie
 import { TraktMovieRecommend } from '@/app/[resource]/[media]/[service]/trakt/movie/recommend/trakt-movie-recommend'
 import { TraktMovieSearch } from '@/app/[resource]/[media]/[service]/trakt/movie/search/trakt-movie-search'
 import { TraktMovieTrend } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend'
+import { TraktShowFavorite } from '@/app/[resource]/[media]/[service]/trakt/show/favorite/trakt-show-favorite'
+import { TraktShowIgnore } from '@/app/[resource]/[media]/[service]/trakt/show/ignore/trakt-show-ignore'
+import { TraktShowRecommend } from '@/app/[resource]/[media]/[service]/trakt/show/recommend/trakt-show-recommend'
+import { TraktShowSearch } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search'
+import { TraktShowTrend } from '@/app/[resource]/[media]/[service]/trakt/show/trend/trakt-show-trend'
 
 export const ResourceContent = ({
   resource,
@@ -39,6 +44,26 @@ export const ResourceContent = ({
 
       {resource === 'trakt' && media === 'movies' && service === 'ignore' && (
         <TraktMovieIgnore />
+      )}
+
+      {resource === 'trakt' && media === 'shows' && service === 'trending' && (
+        <TraktShowTrend />
+      )}
+
+      {resource === 'trakt' && media === 'shows' && service === 'search' && (
+        <TraktShowSearch />
+      )}
+
+      {resource === 'trakt' && media === 'shows' && service === 'favorite' && (
+        <TraktShowFavorite />
+      )}
+
+      {resource === 'trakt' && media === 'shows' && service === 'recommend' && (
+        <TraktShowRecommend />
+      )}
+
+      {resource === 'trakt' && media === 'shows' && service === 'ignore' && (
+        <TraktShowIgnore />
       )}
     </>
   )
