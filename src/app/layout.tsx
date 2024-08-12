@@ -2,6 +2,7 @@ import { Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { headers } from 'next/headers'
 
+import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { Toaster } from '@/components/ui/toaster'
@@ -57,8 +58,8 @@ export default async function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <ScrollToTop />
-            {/* <Footer /> */}
           </div>
+          <Footer />
         </Providers>
         <Toaster />
       </body>

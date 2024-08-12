@@ -149,7 +149,7 @@ export default function Home() {
       <ResourceMenu />
 
       {/* Content Column */}
-      <div className="flex-1 p-6 flex flex-col gap-12">
+      <div className="flex-1 p-6 flex flex-col gap-12 mb-20">
         <Introduction />
         <Movies />
         <Usage />
