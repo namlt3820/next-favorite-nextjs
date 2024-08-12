@@ -105,7 +105,7 @@ export const JikanAnime = ({
                   {genre.name}
                 </Badge>
               ))}
-              {trailer ? (
+              {trailer?.url ? (
                 <Badge variant={'outline'}>
                   <a
                     href={trailer.url}

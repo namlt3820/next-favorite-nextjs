@@ -4,6 +4,7 @@ import { ShieldCheck, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { Icons } from '@/components/icons'
 import { LoginForm } from '@/components/login-form'
 import {
   DropdownMenu,
@@ -44,7 +45,10 @@ export const Navbar = () => {
   return (
     <nav className="fixed inset-x-0 top-0 border-b border-gray-200 bg-white shadow-sm z-10">
       <div className="container mx-auto flex items-center justify-between p-4">
-        <div className="text-xl font-semibold">Next Favorite</div>
+        <Link href="/" className="flex items-center justify-center">
+          <Icons.logo className="h-8 w-8 pr-2" />
+          <span className="text-sm font-medium">NextFavorite</span>
+        </Link>
         <div>
           <ul className="flex space-x-4">
             <li>
