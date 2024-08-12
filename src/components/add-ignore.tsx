@@ -17,7 +17,7 @@ export const AddIgnoreButton = ({
       onClick={() =>
         addToIgnore({
           keywords,
-          itemId: itemId,
+          itemId,
         })
       }
       disabled={createIgnoreMutation.isPending}
