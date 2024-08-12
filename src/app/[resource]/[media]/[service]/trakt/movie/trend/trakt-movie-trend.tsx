@@ -11,7 +11,7 @@ export const TraktMovieTrend = () => {
   if (isLoading)
     return (
       <div className="flex items-center gap-3">
-        Loading trending movies from the Trakt API. Please wait.{' '}
+        Loading trending movies from Trakt API. Please wait.{' '}
         <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     )
@@ -19,8 +19,8 @@ export const TraktMovieTrend = () => {
   if (isError)
     return (
       <div>
-        An error occurred while loading trending movies from the Trakt API.
-        Please try again later or provide feedback.
+        An error occurred while loading trending movies from Trakt API. Please
+        try again later or provide feedback.
       </div>
     )
 

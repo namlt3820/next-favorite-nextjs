@@ -17,7 +17,7 @@ export const AddFavoriteButton = ({
       onClick={() =>
         addToFavorite({
           keywords,
-          itemId: itemId.toString(),
+          itemId,
         })
       }
       disabled={createFavoriteMutation.isPending}

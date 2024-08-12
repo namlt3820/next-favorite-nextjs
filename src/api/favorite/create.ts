@@ -1,5 +1,5 @@
 export type CreateFavoriteParams = {
-  itemId: string
+  itemId: string | number
   recommendSourceId: string
 }
 

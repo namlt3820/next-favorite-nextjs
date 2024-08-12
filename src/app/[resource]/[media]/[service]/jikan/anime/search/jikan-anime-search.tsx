@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { TraktShowSearchAction } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search-action'
-import { TraktShowSearchPagination } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search-pagination'
-import { TraktShow } from '@/components/trakt/trakt-show'
+import { JikanAnimeSearchAction } from '@/app/[resource]/[media]/[service]/jikan/anime/search/jikan-anime-search-action'
+import { JikanAnimeSearchPagination } from '@/app/[resource]/[media]/[service]/jikan/anime/search/jikan-anime-search-pagination'
+import { JikanAnime } from '@/components/jikan/jikan-anime'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -19,14 +19,14 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useSearchTraktShow } from '@/hooks/useSearchTraktShow'
+import { useSearchJikanAnime } from '@/hooks/useSearchJikanAnime'
 
 const formSchema = z.object({
   query: z.string().max(500),
 })
 
-export const TraktShowSearch = () => {
-  const { data, isError, isLoading } = useSearchTraktShow()
+export const JikanAnimeSearch = () => {
+  const { data, isError, isLoading } = useSearchJikanAnime()
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,7 +38,7 @@ export const TraktShowSearch = () => {
 
   const onSubmit = async () => {
     router.push(
-      `/trakt/shows/search?query=${encodeURIComponent(form.getValues().query)}`
+      `/jikan/anime/search?query=${encodeURIComponent(form.getValues().query)}`
     )
   }
 
@@ -92,7 +92,7 @@ export const TraktShowSearch = () => {
 
           {isError ? (
             <div className="text-center">
-              An error occurred while loading trending movies from Trakt API.
+              An error occurred while loading trending anime from Jikan API.
               Please try again later or provide feedback.
             </div>
           ) : null}
@@ -101,15 +101,15 @@ export const TraktShowSearch = () => {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-4">
-          {data?.docs.map((show) => (
-            <TraktShow
-              key={show.show.ids.trakt}
-              show={show}
-              actionComponent={<TraktShowSearchAction show={show} />}
+          {data?.data.map((anime) => (
+            <JikanAnime
+              key={anime.mal_id}
+              anime={anime}
+              actionComponent={<JikanAnimeSearchAction anime={anime} />}
             />
           ))}
         </div>
-        <TraktShowSearchPagination data={data} />
+        <JikanAnimeSearchPagination data={data} />
       </div>
     </div>
   )

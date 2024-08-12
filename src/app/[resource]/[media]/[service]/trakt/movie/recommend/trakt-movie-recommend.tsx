@@ -51,7 +51,7 @@ export const TraktMovieRecommend = () => {
   if (isLoading) {
     return (
       <div className="flex items-center gap-3">
-        Loading your recommended movies from the Trakt API. Please wait.{' '}
+        Loading your recommended movies from Trakt API. Please wait.{' '}
         <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     )
@@ -60,8 +60,8 @@ export const TraktMovieRecommend = () => {
   if (isError) {
     return (
       <div>
-        An error occurred while loading your recommended movies from the Trakt
-        API. Please try again later or provide feedback.
+        An error occurred while loading your recommended movies from Trakt API.
+        Please try again later or provide feedback.
       </div>
     )
   }

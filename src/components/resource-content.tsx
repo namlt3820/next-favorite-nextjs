@@ -1,5 +1,10 @@
 import { capitalize } from 'lodash'
 
+import { JikanAnimeFavorite } from '@/app/[resource]/[media]/[service]/jikan/anime/favorite/jikan-anime-favorite'
+import { JikanAnimeIgnore } from '@/app/[resource]/[media]/[service]/jikan/anime/ignore/jikan-anime-ignore'
+import { JikanAnimeRecommend } from '@/app/[resource]/[media]/[service]/jikan/anime/recommend/jikan-anime-recommend'
+import { JikanAnimeSearch } from '@/app/[resource]/[media]/[service]/jikan/anime/search/jikan-anime-search'
+import { JikanAnimeTrend } from '@/app/[resource]/[media]/[service]/jikan/anime/trend/jikan-anime-trend'
 import { TraktMovieFavorite } from '@/app/[resource]/[media]/[service]/trakt/movie/favorite/trakt-movie-favorite'
 import { TraktMovieIgnore } from '@/app/[resource]/[media]/[service]/trakt/movie/ignore/trakt-movie-ignore'
 import { TraktMovieRecommend } from '@/app/[resource]/[media]/[service]/trakt/movie/recommend/trakt-movie-recommend'
@@ -10,6 +15,25 @@ import { TraktShowIgnore } from '@/app/[resource]/[media]/[service]/trakt/show/i
 import { TraktShowRecommend } from '@/app/[resource]/[media]/[service]/trakt/show/recommend/trakt-show-recommend'
 import { TraktShowSearch } from '@/app/[resource]/[media]/[service]/trakt/show/search/trakt-show-search'
 import { TraktShowTrend } from '@/app/[resource]/[media]/[service]/trakt/show/trend/trakt-show-trend'
+
+enum Resource {
+  trakt = 'trakt',
+  jikan = 'jikan',
+}
+
+enum Media {
+  movies = 'movies',
+  shows = 'shows',
+  anime = 'anime',
+}
+
+enum Service {
+  trending = 'trending',
+  search = 'search',
+  favorite = 'favorite',
+  recommend = 'recommend',
+  ignore = 'ignore',
+}
 
 export const ResourceContent = ({
   resource,
@@ -26,45 +50,65 @@ export const ResourceContent = ({
         {capitalize(resource)} / {capitalize(media)} / {capitalize(service)}
       </h1>
 
-      {resource === 'trakt' && media === 'movies' && service === 'trending' && (
-        <TraktMovieTrend />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.movies &&
+        service === Service.trending && <TraktMovieTrend />}
 
-      {resource === 'trakt' && media === 'movies' && service === 'search' && (
-        <TraktMovieSearch />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.movies &&
+        service === Service.search && <TraktMovieSearch />}
 
-      {resource === 'trakt' && media === 'movies' && service === 'favorite' && (
-        <TraktMovieFavorite />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.movies &&
+        service === Service.favorite && <TraktMovieFavorite />}
 
-      {resource === 'trakt' &&
-        media === 'movies' &&
-        service === 'recommend' && <TraktMovieRecommend />}
+      {resource === Resource.trakt &&
+        media === Media.movies &&
+        service === Service.recommend && <TraktMovieRecommend />}
 
-      {resource === 'trakt' && media === 'movies' && service === 'ignore' && (
-        <TraktMovieIgnore />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.movies &&
+        service === Service.ignore && <TraktMovieIgnore />}
 
-      {resource === 'trakt' && media === 'shows' && service === 'trending' && (
-        <TraktShowTrend />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.shows &&
+        service === Service.trending && <TraktShowTrend />}
 
-      {resource === 'trakt' && media === 'shows' && service === 'search' && (
-        <TraktShowSearch />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.shows &&
+        service === Service.search && <TraktShowSearch />}
 
-      {resource === 'trakt' && media === 'shows' && service === 'favorite' && (
-        <TraktShowFavorite />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.shows &&
+        service === Service.favorite && <TraktShowFavorite />}
 
-      {resource === 'trakt' && media === 'shows' && service === 'recommend' && (
-        <TraktShowRecommend />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.shows &&
+        service === Service.recommend && <TraktShowRecommend />}
 
-      {resource === 'trakt' && media === 'shows' && service === 'ignore' && (
-        <TraktShowIgnore />
-      )}
+      {resource === Resource.trakt &&
+        media === Media.shows &&
+        service === Service.ignore && <TraktShowIgnore />}
+
+      {resource === Resource.jikan &&
+        media === Media.anime &&
+        service === Service.trending && <JikanAnimeTrend />}
+
+      {resource === Resource.jikan &&
+        media === Media.anime &&
+        service === Service.search && <JikanAnimeSearch />}
+
+      {resource === Resource.jikan &&
+        media === Media.anime &&
+        service === Service.favorite && <JikanAnimeFavorite />}
+
+      {resource === Resource.jikan &&
+        media === Media.anime &&
+        service === Service.recommend && <JikanAnimeRecommend />}
+
+      {resource === Resource.jikan &&
+        media === Media.anime &&
+        service === Service.ignore && <JikanAnimeIgnore />}
     </>
   )
 }

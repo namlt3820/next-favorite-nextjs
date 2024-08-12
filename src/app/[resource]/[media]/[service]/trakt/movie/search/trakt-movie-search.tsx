@@ -92,8 +92,8 @@ export const TraktMovieSearch = () => {
 
           {isError ? (
             <div className="text-center">
-              An error occurred while loading trending movies from the Trakt
-              API. Please try again later or provide feedback.
+              An error occurred while loading trending movies from Trakt API.
+              Please try again later or provide feedback.
             </div>
           ) : null}
         </form>

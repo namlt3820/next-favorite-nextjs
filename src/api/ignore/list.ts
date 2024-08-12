@@ -4,6 +4,7 @@ import { ILastEvaluatedKey } from '@/types/LastEvaluatedKey'
 export type GetIgnoresParams = {
   recommendSourceId: string
   lastKey?: ILastEvaluatedKey
+  limit?: number
 }
 
 export type GetIgnoresResponse = {

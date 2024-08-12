@@ -118,7 +118,7 @@ export const TraktMovieFavorite = () => {
   if (isLoading) {
     return (
       <div className="flex items-center gap-3">
-        Loading your favorite movies from the Trakt API. Please wait.{' '}
+        Loading your favorite movies from Trakt API. Please wait.{' '}
         <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     )
@@ -127,7 +127,7 @@ export const TraktMovieFavorite = () => {
   if (isError) {
     return (
       <div>
-        An error occurred while loading your favorite movies from the Trakt API.
+        An error occurred while loading your favorite movies from Trakt API.
         Please try again later or provide feedback.
       </div>
     )

@@ -41,7 +41,7 @@ export const useRecommendSources = () => {
     itemId,
   }: {
     keywords: string[]
-    itemId: string
+    itemId: string | number
   }) => {
     const recommendSourceId = getRecommendSourceId(keywords)
 
@@ -73,7 +73,7 @@ export const useRecommendSources = () => {
     itemId,
   }: {
     keywords: string[]
-    itemId: string
+    itemId: string | number
   }) => {
     const recommendSourceId = getRecommendSourceId(keywords)
 

@@ -1,72 +1,76 @@
 import { ChevronRight, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-import { getIgnores as getIgnoresApi } from '@/api/ignore/list'
+import { getFavorites as getFavoritesApi } from '@/api/favorite/list'
 import {
-  GetTraktMovieDetailResponse,
-  getTraktMovieDetail,
-} from '@/api/trakt/movie/detail'
-import { TraktMovieIgnoreAction } from '@/app/[resource]/[media]/[service]/trakt/movie/ignore/trakt-movie-ignore-action'
-import { TraktMovie } from '@/components/trakt/trakt-movie'
+  GetJikanAnimeDetailResponse,
+  getJikanAnimeDetail,
+} from '@/api/jikan/anime/detail'
+import { JikanAnime } from '@/components/jikan/jikan-anime'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { scrollToTop } from '@/lib/scrollToTop'
 import { IFavorite } from '@/types/Favorite'
 import { ILastEvaluatedKey } from '@/types/LastEvaluatedKey'
 
-const sortMoviesResponse = ({
+import { JikanAnimeFavoriteAction } from './jikan-anime-favorite-action'
+
+const sortAnimeListResponse = ({
   items,
-  movies,
+  animeList,
 }: {
   items: IFavorite[]
-  movies: GetTraktMovieDetailResponse[]
+  animeList: GetJikanAnimeDetailResponse[]
 }) => {
-  const sortedMoviesResponse = []
+  const sortedAnimeResponse = []
   for (const item of items) {
-    const movie = movies.find((movie) => movie.itemId === Number(item.itemId))
-    if (movie) {
-      sortedMoviesResponse.push({
-        movie,
+    const anime = animeList.find(
+      (anime) => anime.itemId === Number(item.itemId)
+    )
+    if (anime) {
+      sortedAnimeResponse.push({
+        anime,
         id: item.id,
       })
     }
   }
 
-  return sortedMoviesResponse
+  return sortedAnimeResponse
 }
 
-export const TraktMovieIgnore = () => {
+export const JikanAnimeFavorite = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const [lastKey, setLastKey] = useState<ILastEvaluatedKey | undefined>(
     undefined
   )
-  const [movies, setMovies] = useState<
-    { id: string; movie: GetTraktMovieDetailResponse }[]
+  const [animeList, setAnimeList] = useState<
+    { id: string; anime: GetJikanAnimeDetailResponse }[]
   >([])
   const { getRecommendSourceId } = useRecommendSources()
-  const recommendSourceId = getRecommendSourceId(['trakt', 'movie'])
+  const recommendSourceId = getRecommendSourceId(['jikan', 'anime'])
 
   useEffect(() => {
-    const getIgnores = async () => {
+    const getFavorites = async () => {
       try {
         if (!recommendSourceId) {
           return
         }
         setIsLoading(true)
 
-        const { items, lastEvaluatedKey } = await getIgnoresApi({
+        const { items, lastEvaluatedKey } = await getFavoritesApi({
           recommendSourceId,
+          limit: 3,
         })
 
         if (items.length) {
           const itemIds = items.map(({ itemId }) => Number(itemId))
-          const moviesResponse = await getTraktMovieDetail({ itemIds })
-          const sortedMoviesResponse = sortMoviesResponse({
+          const animeListResponse = await getJikanAnimeDetail({ itemIds })
+          const sortedAnimeListResponse = sortAnimeListResponse({
             items,
-            movies: moviesResponse,
+            animeList: animeListResponse,
           })
-          setMovies(sortedMoviesResponse)
+          setAnimeList(sortedAnimeListResponse)
         }
 
         if (lastEvaluatedKey) {
@@ -80,7 +84,7 @@ export const TraktMovieIgnore = () => {
       }
     }
 
-    getIgnores()
+    getFavorites()
   }, [recommendSourceId])
 
   const handleClickNext = async () => {
@@ -91,19 +95,20 @@ export const TraktMovieIgnore = () => {
     scrollToTop()
     try {
       setIsLoading(true)
-      const { items, lastEvaluatedKey } = await getIgnoresApi({
+      const { items, lastEvaluatedKey } = await getFavoritesApi({
         recommendSourceId,
         lastKey,
+        limit: 3,
       })
 
       if (items.length) {
         const itemIds = items.map(({ itemId }) => Number(itemId))
-        const moviesResponse = await getTraktMovieDetail({ itemIds })
-        const sortedMoviesResponse = sortMoviesResponse({
+        const animeListResponse = await getJikanAnimeDetail({ itemIds })
+        const sortedAnimeListResponse = sortAnimeListResponse({
           items,
-          movies: moviesResponse,
+          animeList: animeListResponse,
         })
-        setMovies(sortedMoviesResponse)
+        setAnimeList(sortedAnimeListResponse)
       }
 
       setLastKey(lastEvaluatedKey)
@@ -118,7 +123,7 @@ export const TraktMovieIgnore = () => {
   if (isLoading) {
     return (
       <div className="flex items-center gap-3">
-        Loading your ignored movies from Trakt API. Please wait.{' '}
+        Loading your favorite anime from Jikan API. Please wait.{' '}
         <Loader2 className="h-6 w-6 animate-spin" />
       </div>
     )
@@ -127,7 +132,7 @@ export const TraktMovieIgnore = () => {
   if (isError) {
     return (
       <div>
-        An error occurred while loading your ignored movies from Trakt API.
+        An error occurred while loading your favorite anime from Jikan API.
         Please try again later or provide feedback.
       </div>
     )
@@ -136,18 +141,20 @@ export const TraktMovieIgnore = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap gap-4">
-        {movies.map((movie) => (
-          <TraktMovie
-            key={movie.id}
-            movie={{ movie: movie.movie?.data }}
-            actionComponent={
-              <TraktMovieIgnoreAction
-                movie={{ movie: movie.movie.data }}
-                id={movie.id}
-              />
-            }
-          ></TraktMovie>
-        ))}
+        {animeList.map((anime) => {
+          const {
+            anime: { data },
+            id,
+          } = anime
+
+          return (
+            <JikanAnime
+              key={data.mal_id}
+              anime={data}
+              actionComponent={<JikanAnimeFavoriteAction id={id} />}
+            ></JikanAnime>
+          )
+        })}
       </div>
       {lastKey ? (
         <div className="mx-auto w-full flex justify-center">
