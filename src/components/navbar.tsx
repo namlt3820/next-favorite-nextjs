@@ -53,7 +53,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="fixed inset-x-0 top-0 border-b border-gray-200 bg-white shadow-sm z-10">
+    <nav className="fixed inset-x-0 top-0 border-b border-gray-200 bg-white shadow-sm z-20">
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link href="/" className="flex items-center justify-center">
           <Icons.logo className="h-8 w-8 pr-2" />

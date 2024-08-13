@@ -43,7 +43,7 @@ export const ResourceMenu = ({
 
   return (
     <div className="w-64 p-4 space-y-4 border ">
-      <div className="fixed">
+      <div className="fixed z-10">
         <ul className="space-y-2">
           <li>
             <div className="w-full text-left px-4 py-2 rounded">
