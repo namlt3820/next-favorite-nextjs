@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export function constructMetadata({
-  title = '',
-  description = '',
+  title = 'NextFavorite - All Your Entertainment, One Search',
+  description = 'NextFavorite is your go-to source for finding and exploring entertainment media. Use our search features to build and expand your favorite list with movies, TV shows, anime, and more!',
   image = '/homepage_1.jpg',
   icons = '/icon.ico',
   noIndex = false,
