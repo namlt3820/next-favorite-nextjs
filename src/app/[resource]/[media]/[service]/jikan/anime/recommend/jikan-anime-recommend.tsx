@@ -1,5 +1,4 @@
 import shuffle from 'lodash/shuffle'
-import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 import {
@@ -8,6 +7,7 @@ import {
 } from '@/api/jikan/anime/detail'
 import { getJikanAnimeRecommend as getJikanAnimeRecommendApi } from '@/api/jikan/anime/recommend'
 import { JikanAnime } from '@/components/jikan/jikan-anime'
+import { LoadingResource } from '@/components/loading-resource'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { scrollToTop } from '@/lib/scrollToTop'
@@ -65,10 +65,7 @@ export const JikanAnimeRecommend = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-3">
-        Loading your recommended anime from Jikan API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading your recommended anime from Jikan API. Please wait." />
     )
   }
 

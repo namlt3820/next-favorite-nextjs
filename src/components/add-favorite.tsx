@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 
 export const AddFavoriteButton = ({
@@ -11,6 +12,7 @@ export const AddFavoriteButton = ({
   itemId: string | number
 }) => {
   const { addToFavorite, createFavoriteMutation } = useRecommendSources()
+  const isDesktop = useMediaQuery('(min-width: 1280px)')
 
   return (
     <Button
@@ -21,6 +23,7 @@ export const AddFavoriteButton = ({
         })
       }
       disabled={createFavoriteMutation.isPending}
+      size={isDesktop ? 'default' : 'sm'}
     >
       Add to Favorite{' '}
       {createFavoriteMutation.isPending ? (

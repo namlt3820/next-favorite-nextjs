@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { useJikanAnimeTrend } from '@/hooks/useJikanAnimeTrend'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useTraktMovieTrend } from '@/hooks/useTraktMovieTrend'
 
 const Introduction = () => (
@@ -105,7 +106,7 @@ const PosterCarousel = ({ posters }: { posters: string[] }) => {
         {posters.map((poster, index) => (
           <CarouselItem
             key={`${poster}_${index}`}
-            className="md:basis-1/2 lg:basis-1/5 "
+            className="basis-1/2 lg:basis-1/5 "
           >
             <Card>
               <CardContent className=" p-0 h-[200px] relative">
@@ -114,6 +115,7 @@ const PosterCarousel = ({ posters }: { posters: string[] }) => {
                   src={poster ? poster : '/poster-not-found.png'}
                   className="rounded-md"
                   fill={true}
+                  sizes="auto"
                 />
               </CardContent>
             </Card>
@@ -143,13 +145,15 @@ const Anime = () => {
 }
 
 export default function Home() {
+  const isDesktop = useMediaQuery('(min-width: 1280px)')
+
   return (
     <div className="flex mt-[60px] min-h-[100dvh]">
       {/* Sidebar Column */}
-      <ResourceMenu />
+      {isDesktop ? <ResourceMenu /> : null}
 
       {/* Content Column */}
-      <div className="flex-1 p-6 flex flex-col gap-12 mb-20">
+      <div className="flex-1 p-6 flex flex-col gap-12 mb-14 md:mb-20">
         <Introduction />
         <Movies />
         <Usage />

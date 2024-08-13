@@ -1,10 +1,12 @@
 import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 
 export const RemoveIgnoreButton = ({ id }: { id: string }) => {
   const { removeFromIgnore, deleteIgnoreMutation } = useRecommendSources()
+  const isDesktop = useMediaQuery('(min-width: 1280px)')
 
   return (
     <Button
@@ -14,6 +16,7 @@ export const RemoveIgnoreButton = ({ id }: { id: string }) => {
         })
       }
       disabled={deleteIgnoreMutation.isPending}
+      size={isDesktop ? 'default' : 'sm'}
     >
       Remove from Ignore{' '}
       {deleteIgnoreMutation.isPending ? (

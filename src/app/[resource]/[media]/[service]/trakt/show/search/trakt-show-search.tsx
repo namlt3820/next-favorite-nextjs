@@ -19,7 +19,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useSearchTraktShow } from '@/hooks/useSearchTraktShow'
+import { cn } from '@/lib/utils'
 
 const formSchema = z.object({
   query: z.string().max(500),
@@ -28,6 +30,7 @@ const formSchema = z.object({
 export const TraktShowSearch = () => {
   const { data, isError, isLoading } = useSearchTraktShow()
   const router = useRouter()
+  const isDesktop = useMediaQuery('(min-width: 1280px)')
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,11 +46,11 @@ export const TraktShowSearch = () => {
   }
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className={cn('flex flex-col gap-7', { 'gap-4': !isDesktop })}>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-7"
+          className={cn('flex flex-col gap-7', { 'gap-4': !isDesktop })}
         >
           <FormField
             control={form.control}
@@ -55,7 +58,11 @@ export const TraktShowSearch = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex items-center">
+                  <div
+                    className={cn('flex items-center', {
+                      'flex-col items-start gap-4': !isDesktop,
+                    })}
+                  >
                     <Label htmlFor="name" className="w-24">
                       {'Title'} (*)
                     </Label>

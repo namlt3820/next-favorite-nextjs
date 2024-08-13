@@ -1,4 +1,4 @@
-import { ChevronRight, Loader2 } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { getFavorites as getFavoritesApi } from '@/api/favorite/list'
@@ -7,6 +7,7 @@ import {
   getJikanAnimeDetail,
 } from '@/api/jikan/anime/detail'
 import { JikanAnime } from '@/components/jikan/jikan-anime'
+import { LoadingResource } from '@/components/loading-resource'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
 import { scrollToTop } from '@/lib/scrollToTop'
@@ -122,10 +123,7 @@ export const JikanAnimeFavorite = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-3">
-        Loading your favorite anime from Jikan API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading your favorite anime from Jikan API. Please wait." />
     )
   }
 

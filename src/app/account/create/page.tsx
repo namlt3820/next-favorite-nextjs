@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -62,7 +63,6 @@ export default function CreateAccount() {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     await createAccountMutation.mutate(data)
-    form.reset()
   }
 
   return (
@@ -137,15 +137,25 @@ export default function CreateAccount() {
             />
 
             <div className="flex justify-center">
-              <Button type="submit">{'Create Account'}</Button>
+              <Button type="submit" disabled={createAccountMutation.isPending}>
+                {createAccountMutation.isPending ? (
+                  <>
+                    {' '}
+                    Please wait
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                  </>
+                ) : (
+                  'Create Account'
+                )}
+              </Button>
             </div>
-            {createAccountMutation.status === 'success' ? (
+            {createAccountMutation.isSuccess && (
               <p className="text-center">
                 {
                   'Account created successfully. Please check your email inbox to get the confirmation code.'
                 }
               </p>
-            ) : null}
+            )}
           </form>
         </Form>
       </div>

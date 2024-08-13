@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { Loader2 } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -115,15 +116,25 @@ export default function EmailVerification() {
             />
 
             <div className="flex justify-center">
-              <Button type="submit">{'Verify Email'}</Button>
+              <Button type="submit" disabled={verifyEmailMutation.isPending}>
+                {verifyEmailMutation.isPending ? (
+                  <>
+                    {' '}
+                    Please wait
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                  </>
+                ) : (
+                  'Verify Email'
+                )}
+              </Button>
             </div>
-            {verifyEmailMutation.status === 'success' ? (
+            {verifyEmailMutation.isSuccess && (
               <p className="text-center">
                 {
                   'Your email has been successfully verified. You will be redirected to the homepage shortly.'
                 }
               </p>
-            ) : null}
+            )}
           </form>
         </Form>
       </div>

@@ -1,4 +1,4 @@
-import { ChevronRight, Loader2 } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { getIgnores as getIgnoresApi } from '@/api/ignore/list'
@@ -7,6 +7,7 @@ import {
   getTraktMovieDetail,
 } from '@/api/trakt/movie/detail'
 import { TraktMovieIgnoreAction } from '@/app/[resource]/[media]/[service]/trakt/movie/ignore/trakt-movie-ignore-action'
+import { LoadingResource } from '@/components/loading-resource'
 import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
@@ -117,10 +118,7 @@ export const TraktMovieIgnore = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-3">
-        Loading your ignored movies from Trakt API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading your ignored movies from Trakt API. Please wait." />
     )
   }
 

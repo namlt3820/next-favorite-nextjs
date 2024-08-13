@@ -1,7 +1,6 @@
-import { Loader2 } from 'lucide-react'
-
 import { TraktMovieTrendAction } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend-action'
 import { TraktMovieTrendPagination } from '@/app/[resource]/[media]/[service]/trakt/movie/trend/trakt-movie-trend-pagination'
+import { LoadingResource } from '@/components/loading-resource'
 import { TraktMovie } from '@/components/trakt/trakt-movie'
 import { useTraktMovieTrend } from '@/hooks/useTraktMovieTrend'
 
@@ -10,10 +9,7 @@ export const TraktMovieTrend = () => {
 
   if (isLoading)
     return (
-      <div className="flex items-center gap-3">
-        Loading trending movies from Trakt API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading trending movies from Trakt API. Please wait." />
     )
 
   if (isError)

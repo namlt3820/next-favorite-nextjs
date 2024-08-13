@@ -1,8 +1,7 @@
-import { Loader2 } from 'lucide-react'
-
 import { JikanAnimeTrendAction } from '@/app/[resource]/[media]/[service]/jikan/anime/trend/jikan-anime-trend-action'
 import { JikanAnimeTrendPagination } from '@/app/[resource]/[media]/[service]/jikan/anime/trend/jikan-anime-trend-pagination'
 import { JikanAnime } from '@/components/jikan/jikan-anime'
+import { LoadingResource } from '@/components/loading-resource'
 import { useJikanAnimeTrend } from '@/hooks/useJikanAnimeTrend'
 
 export const JikanAnimeTrend = () => {
@@ -10,10 +9,7 @@ export const JikanAnimeTrend = () => {
 
   if (isLoading)
     return (
-      <div className="flex items-center gap-3">
-        Loading trending anime from Jikan API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading trending anime from Jikan API. Please wait." />
     )
 
   if (isError)

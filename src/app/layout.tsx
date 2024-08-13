@@ -21,8 +21,11 @@ export async function generateViewport(): Promise<Viewport> {
         width: 'device-width',
         initialScale: 1,
         maximumScale: 1, // disables auto-zoom on ios safari
+        minimumScale: 1,
       }
-    : {}
+    : {
+        minimumScale: 1,
+      }
 }
 
 /**

@@ -1,8 +1,8 @@
-import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { getTraktShowRecommend as getTraktShowRecommendApi } from '@/api/trakt/show/recommend'
 import { TraktShowRecommendAction } from '@/app/[resource]/[media]/[service]/trakt/show/recommend/trakt-show-recommend-action'
+import { LoadingResource } from '@/components/loading-resource'
 import { TraktShow } from '@/components/trakt/trakt-show'
 import { Button } from '@/components/ui/button'
 import { useRecommendSources } from '@/hooks/useRecommendSources'
@@ -50,10 +50,7 @@ export const TraktShowRecommend = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-3">
-        Loading your recommended shows from Trakt API. Please wait.{' '}
-        <Loader2 className="h-6 w-6 animate-spin" />
-      </div>
+      <LoadingResource message="Loading your recommended shows from Trakt API. Please wait." />
     )
   }
 

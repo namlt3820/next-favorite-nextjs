@@ -3,9 +3,11 @@
 import { ShieldCheck, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 import { Icons } from '@/components/icons'
 import { LoginForm } from '@/components/login-form'
+import { ResourceMenuMobile } from '@/components/resource-menu-mobile'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +21,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useToast } from '@/components/ui/use-toast'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { TRY_AGAIN } from '@/lib/messages'
 import { useAuth } from '@/providers/Auth'
 
@@ -26,6 +29,13 @@ export const Navbar = () => {
   const { user, logout } = useAuth()
   const { toast } = useToast()
   const router = useRouter()
+  const isDesktop = useMediaQuery('(min-width: 1280px)')
+  const params = useParams<{
+    resource: string
+    media: string
+    service: string
+  }>()
+  const { resource, media, service } = params
 
   const onLogoutClick = async () => {
     try {
@@ -51,6 +61,15 @@ export const Navbar = () => {
         </Link>
         <div>
           <ul className="flex space-x-4">
+            {isDesktop ? null : (
+              <li>
+                <ResourceMenuMobile
+                  resource={resource}
+                  media={media}
+                  service={service}
+                />
+              </li>
+            )}
             <li>
               <Link
                 href="/"
@@ -59,7 +78,6 @@ export const Navbar = () => {
                 Home
               </Link>
             </li>
-
             {user ? (
               <li>
                 <span
