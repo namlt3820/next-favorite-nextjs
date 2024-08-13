@@ -14,7 +14,7 @@ export const Footer = () => {
               &copy; {currentYear} NextFavorite
             </h2>
             <p className="text-sm text-gray-400 md:text-base">
-              Email: nextfavoritedev0@gladiolus.info
+              Email: namlt3820@gmail.com
             </p>
           </div>
 
