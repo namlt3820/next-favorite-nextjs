@@ -14,14 +14,14 @@ This project has two components:
 
 1. A Next.js server for the frontend.
 1. A serverless backend that utilizes various AWS services:
-   1. Cloud Development Kit (CDK)
-   1. Lambda
-   1. API Gateway
-   1. DynamoDB
-   1. Cognito
-   1. Simple Email Service (SES)
-   1. Secret manager
-   1. Identity and Access Management (IAM)
+   - Cloud Development Kit (CDK)
+   - Lambda
+   - API Gateway
+   - DynamoDB
+   - Cognito
+   - Simple Email Service (SES)
+   - Secret manager
+   - Identity and Access Management (IAM)
 
 ## Development
 
