@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import { scrollToTop } from '@/lib/scrollToTop'
 import { IPagination } from '@/types/Pagination'
 import { ITraktShow } from '@/types/TraktShow'
 
@@ -42,7 +43,7 @@ export const TraktShowSearchPagination = ({
     items.push(
       <PaginationNext
         href={`${path}page=${page + 1}`}
-        // onClick={scrollToTop}
+        onClick={scrollToTop}
       ></PaginationNext>
     )
   }

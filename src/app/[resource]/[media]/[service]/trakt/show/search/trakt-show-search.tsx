@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -22,7 +21,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useSearchTraktShow } from '@/hooks/useSearchTraktShow'
-import { scrollToTop } from '@/lib/scrollToTop'
 import { cn } from '@/lib/utils'
 
 const formSchema = z.object({
@@ -33,10 +31,6 @@ export const TraktShowSearch = () => {
   const { data, isError, isLoading } = useSearchTraktShow()
   const router = useRouter()
   const isDesktop = useMediaQuery('(min-width: 1280px)')
-
-  useEffect(() => {
-    scrollToTop()
-  }, [])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
