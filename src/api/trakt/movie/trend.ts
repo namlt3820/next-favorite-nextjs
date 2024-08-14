@@ -6,14 +6,20 @@ import { ITraktMovie } from '@/types/TraktMovie'
 export const getTraktTrendingMovies = async ({
   page,
   limit,
+  recommendSourceId,
+  userId,
 }: {
   page?: number
   limit?: number
+  recommendSourceId?: string
+  userId?: string
 }): Promise<IPagination<ITraktMovie>> => {
   const stringifiedQuery = qs.stringify(
     {
       page,
       limit,
+      recommendSourceId,
+      userId,
     },
     { addQueryPrefix: true }
   )
