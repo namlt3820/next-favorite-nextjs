@@ -6,14 +6,20 @@ import { ITraktShow } from '@/types/TraktShow'
 export const getTraktTrendingShows = async ({
   page,
   limit,
+  recommendSourceId,
+  userId,
 }: {
   page?: number
   limit?: number
+  recommendSourceId?: string
+  userId?: string
 }): Promise<IPagination<ITraktShow>> => {
   const stringifiedQuery = qs.stringify(
     {
       page,
       limit,
+      recommendSourceId,
+      userId,
     },
     { addQueryPrefix: true }
   )

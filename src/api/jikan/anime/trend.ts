@@ -5,14 +5,20 @@ import { IJikanAnime } from '@/types/JikanAnime'
 export const getJikanTrendingAnime = async ({
   page,
   limit,
+  recommendSourceId,
+  userId,
 }: {
   page?: number
   limit?: number
+  recommendSourceId?: string
+  userId?: string
 }): Promise<IJikanAnime> => {
   const stringifiedQuery = qs.stringify(
     {
       page,
       limit,
+      recommendSourceId,
+      userId,
     },
     { addQueryPrefix: true }
   )
