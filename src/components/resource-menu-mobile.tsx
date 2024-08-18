@@ -61,62 +61,6 @@ export const ResourceMenuMobile = ({
         <DropdownMenuGroup>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
-              <span>Trakt Movies</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <ResourceMenuItem
-                  title="Trending"
-                  href="/trakt/movies/trending"
-                  selected={
-                    getResourcePath(resource, media, service) ===
-                    '/trakt/movies/trending'
-                  }
-                />
-                <ResourceMenuItem
-                  title="Search"
-                  href="/trakt/movies/search"
-                  selected={
-                    getResourcePath(resource, media, service) ===
-                    '/trakt/movies/search'
-                  }
-                />
-                <ResourceMenuItem
-                  title="Recommend"
-                  href="/trakt/movies/recommend"
-                  selected={
-                    getResourcePath(resource, media, service) ===
-                    '/trakt/movies/recommend'
-                  }
-                />
-                {user ? (
-                  <>
-                    <ResourceMenuItem
-                      title="Favorite"
-                      href="/trakt/movies/favorite"
-                      selected={
-                        getResourcePath(resource, media, service) ===
-                        '/trakt/movies/favorite'
-                      }
-                    />
-                    <ResourceMenuItem
-                      title="Ignore"
-                      href="/trakt/movies/ignore"
-                      selected={
-                        getResourcePath(resource, media, service) ===
-                        '/trakt/movies/ignore'
-                      }
-                    />
-                  </>
-                ) : null}
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
               <span>Trakt Shows</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
@@ -137,16 +81,16 @@ export const ResourceMenuMobile = ({
                     '/trakt/shows/search'
                   }
                 />
-                <ResourceMenuItem
-                  title="Recommend"
-                  href="/trakt/shows/recommend"
-                  selected={
-                    getResourcePath(resource, media, service) ===
-                    '/trakt/shows/recommend'
-                  }
-                />
                 {user ? (
                   <>
+                    <ResourceMenuItem
+                      title="Recommend"
+                      href="/trakt/shows/recommend"
+                      selected={
+                        getResourcePath(resource, media, service) ===
+                        '/trakt/shows/recommend'
+                      }
+                    />
                     <ResourceMenuItem
                       title="Favorite"
                       href="/trakt/shows/favorite"
@@ -161,6 +105,63 @@ export const ResourceMenuMobile = ({
                       selected={
                         getResourcePath(resource, media, service) ===
                         '/trakt/shows/ignore'
+                      }
+                    />
+                  </>
+                ) : null}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <span>Trakt Movies</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <ResourceMenuItem
+                  title="Trending"
+                  href="/trakt/movies/trending"
+                  selected={
+                    getResourcePath(resource, media, service) ===
+                    '/trakt/movies/trending'
+                  }
+                />
+                <ResourceMenuItem
+                  title="Search"
+                  href="/trakt/movies/search"
+                  selected={
+                    getResourcePath(resource, media, service) ===
+                    '/trakt/movies/search'
+                  }
+                />
+                {user ? (
+                  <>
+                    <ResourceMenuItem
+                      title="Recommend"
+                      href="/trakt/movies/recommend"
+                      selected={
+                        getResourcePath(resource, media, service) ===
+                        '/trakt/movies/recommend'
+                      }
+                    />
+                    <ResourceMenuItem
+                      title="Favorite"
+                      href="/trakt/movies/favorite"
+                      selected={
+                        getResourcePath(resource, media, service) ===
+                        '/trakt/movies/favorite'
+                      }
+                    />
+                    <ResourceMenuItem
+                      title="Ignore"
+                      href="/trakt/movies/ignore"
+                      selected={
+                        getResourcePath(resource, media, service) ===
+                        '/trakt/movies/ignore'
                       }
                     />
                   </>
@@ -193,16 +194,16 @@ export const ResourceMenuMobile = ({
                     '/jikan/anime/search'
                   }
                 />
-                <ResourceMenuItem
-                  title="Recommend"
-                  href="/jikan/anime/recommend"
-                  selected={
-                    getResourcePath(resource, media, service) ===
-                    '/jikan/anime/recommend'
-                  }
-                />
                 {user ? (
                   <>
+                    <ResourceMenuItem
+                      title="Recommend"
+                      href="/jikan/anime/recommend"
+                      selected={
+                        getResourcePath(resource, media, service) ===
+                        '/jikan/anime/recommend'
+                      }
+                    />
                     <ResourceMenuItem
                       title="Favorite"
                       href="/jikan/anime/favorite"

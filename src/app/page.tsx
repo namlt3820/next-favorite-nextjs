@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/carousel'
 import { useJikanAnimeTrend } from '@/hooks/useJikanAnimeTrend'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { useTraktMovieTrend } from '@/hooks/useTraktMovieTrend'
+import { useTraktShowTrend } from '@/hooks/useTraktShowTrend'
 
 const Introduction = () => (
   <div>
@@ -128,11 +128,11 @@ const PosterCarousel = ({ posters }: { posters: string[] }) => {
   )
 }
 
-const Movies = () => {
-  const { data, isLoading, isError } = useTraktMovieTrend()
+const TvShows = () => {
+  const { data, isError, isLoading } = useTraktShowTrend()
   if (isError || isLoading) return null
 
-  const posters = data?.docs.map((item) => item.movie.poster) || []
+  const posters = data?.docs.map((item) => item.show.poster) || []
   return <PosterCarousel posters={posters} />
 }
 
@@ -155,7 +155,7 @@ export default function Home() {
       {/* Content Column */}
       <div className="flex-1 p-6 flex flex-col gap-12 mb-14 md:mb-20">
         <Introduction />
-        <Movies />
+        <TvShows />
         <Usage />
         <Anime />
       </div>
